@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="/static/images/favicon.png">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -50,9 +50,17 @@
             border: black solid;
             border-radius: 5px;
         }
+
+        #delete-btn{
+            color: white;
+            background-color: red;
+            border: 1px solid black;
+            border-radius: 15%;
+
+        }
     </style>
 
-		<!-- script-->
+    <!-- script-->
     <script>
         $(document).ready(function () {
             showArticles();
@@ -83,17 +91,13 @@
                 url: "/post",
                 data: {title_give:title, pw_give:pw, comment_give:comment},
                 success: function (response) {
-                    let list = response['posts']
-                    for (let i = 0; i < list.length; i++){
-
-                        makeListPost(list[i],i)
-                    }
+                    alert(response.result)
+                    window.location.href = '/'
                 }
             })
         }
 
         function showArticles() {
-            // todo
             $("#list-post").empty()
             $.ajax({
                 type: "GET",
@@ -101,17 +105,17 @@
                 data: {},
                 success: function (response) {
                     let list = response['posts']
+                    console.log(list)
                     for (let i = 0; i < list.length; i++){
-
                         makeListPost(list[i],i)
                     }
                 }
             })
-
         }
 
         function makeListPost(post, index) {
-            let idx = index
+            let idx = index + 1
+            let realidx = post['idx']
             let title = post['title']
             let date = post['reg_date']
             let tempHtml = `<tr>
@@ -119,14 +123,15 @@
                                 <td>${title}</td>
                                 <td>${date}</td>
                                 <td>
-                                    <button onclick="detailArticle(idx)"></button>
+                                    <button id="delete-btn" onclick="detailArticle(${realidx})">삭제</button>
                                 </td>
                             </tr>`
             $("#list-post").append(tempHtml);
         }
 
         function detailArticle(idx) {
-            // todo
+            console.log(idx)
+            window.location.href=`/detail/${idx}`
         }
     </script>
 
@@ -135,7 +140,7 @@
 <body>
 <div class="wrap">
     <div class="jumbotron">
-        <h1 class="display-4">나홀로 메모장!</h1>
+        <h1 class="display-4">나홀로 메모장111!</h1>
         <hr class="my-4">
         <p class="lead">
             <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">포스팅 박스 열기

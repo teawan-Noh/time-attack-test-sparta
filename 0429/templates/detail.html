@@ -40,12 +40,17 @@
 
 		<!-- script-->
     <script>
-				// pw check는 편의상 client에서 진행.
+
+
+        // pw check는 편의상 client에서 진행.
         function checkPw()
         {
+            let check = '{{ post.pw }}'
             let pw = $("#post-pw").val();
+            console.log(check);
             if(pw === '{{ post.pw }}') {
                 deleteArticle();
+                alert("비밀번호가 같습니다!")
             }
             else {
                 alert("비밀번호가 다릅니다!")
@@ -54,6 +59,19 @@
 
         function deleteArticle() {
             // todo
+            $.ajax({
+                type: "DELETE",
+                url: `/post?idx={{ post.idx }}`,
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                       alert("삭제 성공!");
+                       window.location.href='/'
+                    } else {
+                        alert("서버 오류!");
+                    }
+                }
+            })
         }
     </script>
 
