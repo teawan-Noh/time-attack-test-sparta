@@ -73,7 +73,7 @@ class PlayerBTeam extends Player {
         char[] charArray = new char[number.length()];
         for (int i = 0; i < number.length(); i++) {
             charArray[i] = number.charAt(i);
-            System.out.print(charArray[i]);
+//            System.out.print(charArray[i]);
         }
 
         if(ball == 4) {
