@@ -35,17 +35,17 @@ class Calculator
     {
         int result = 0;
         // todo
-        Set<Integer> integerSet1 = new HashSet<>();
-        Set<Integer> integerSet2 = new HashSet<>();
+        Set<Integer> differenceOfSet1 = new HashSet<>();
+        Set<Integer> differenceOfSet2 = new HashSet<>();
         for (int i = 0; i < A.length; i++) {
-            integerSet1.add(A[i]);
+            differenceOfSet1.add(A[i]);
         }
         for (int i = 0; i < B.length; i++) {
-            integerSet2.add(B[i]);
+            differenceOfSet2.add(B[i]);
         }
 
-        HashSet<Integer> differenceOfSet = new HashSet<>(integerSet1);  // s1으로 intersection 생성
-        differenceOfSet.removeAll(integerSet2);
+        HashSet<Integer> differenceOfSet = new HashSet<>(differenceOfSet1);  // s1으로 intersection 생성
+        differenceOfSet.removeAll(differenceOfSet2);
 
 //        System.out.println(intersection); // [2, 19, 4, 11]
         Iterator<Integer> iter = differenceOfSet.iterator(); // set을 Iterator 안에 담기
