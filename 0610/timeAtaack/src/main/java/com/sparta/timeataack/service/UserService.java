@@ -7,6 +7,8 @@ import com.sparta.timeataack.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserService {
 
@@ -36,11 +38,12 @@ public class UserService {
         return user;
     }
 
+    @Transactional  // @Transactional 사용 or repository.save 처리
     public User updateUser(Long id, UserRequestDto requestDto) {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new NullPointerException("해당 아이디가 존재하지 않습니다.")
         );
-
+        System.out.println("service" + requestDto.getName());
         user.updateInfo(requestDto);
         return user;
     }

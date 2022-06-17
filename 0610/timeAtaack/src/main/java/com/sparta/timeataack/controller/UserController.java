@@ -20,15 +20,13 @@ public class UserController {
     // 유저 생성
     @PostMapping("/create")
     public User registerUser(SignupRequestDto requestDto) {
-        User user = userService.registerUser(requestDto);
-        return user;
+        return userService.registerUser(requestDto);
     }
 
     // 유저 검색
     @GetMapping("/read/{id}")
     public User findUser(@PathVariable Long id){
-        User user = userService.findeUser(id);
-        return user;
+        return userService.findeUser(id);
     }
 
     // 유저 정보 업데이트
